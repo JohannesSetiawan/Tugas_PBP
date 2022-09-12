@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from katalog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('example_app.urls')),
-    path('katalog/', include('katalog.urls')),
+    path('', views.show_katalog, name='show_katalog'),
 ]
 
 # TODO: Implement Routings Here
