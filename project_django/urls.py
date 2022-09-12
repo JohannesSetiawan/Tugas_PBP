@@ -19,7 +19,6 @@ from katalog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('example_app.urls')),
     path('', views.show_katalog, name='show_katalog'),
 ]
 
