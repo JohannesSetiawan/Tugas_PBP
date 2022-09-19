@@ -1,0 +1,123 @@
+[
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":1,
+        "fields":{
+            "watched":"No",
+            "title":"Fall",
+            "rating": "3",
+            "release_date": "August 12, 2022",
+            "review": "Fundamentally absurd yet as evocatively minimalist as its title, Fall is a sustained adrenaline rush for viewers willing to suspend disbelief."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":2,
+        "fields":{
+            "watched":"No",
+            "title":"God's Country",
+            "rating": "4",
+            "release_date": "September 16, 2022",
+            "review": "Led by an outstanding Thandiwe Newton, God's Country rewards patient viewers with a slow-burning but ultimately explosive story of inexorable conflict."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":3,
+        "fields":{
+            "watched":"Yes",
+            "title":"Top Gun: Maverick",
+            "rating": "5",
+            "release_date": "May 27, 2022",
+            "review": "Top Gun: Maverick pulls off a feat even trickier than a 4G inverted dive, delivering a long-belated sequel that surpasses its predecessor in wildly entertaining style."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":4,
+        "fields":{
+            "watched":"No",
+            "title":"Elvis",
+            "rating": "4",
+            "release_date": "August 9, 2022",
+            "review": "The standard rock biopic formula gets all shook up in Elvis, with Baz Luhrmann's dazzling energy and style perfectly complemented by Austin Butler's outstanding lead performance."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":5,
+        "fields":{
+            "watched":"Yes",
+            "title":"Moonage Daydream",
+            "rating": "5",
+            "release_date": "September 16, 2022",
+            "review": "An audiovisual treat for Bowie fans, Moonage Daydream takes an appropriately distinctive approach to one of modern music's most mercurial artists."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":6,
+        "fields":{
+            "watched":"No",
+            "title":"Confess, Fletch",
+            "rating": "4",
+            "release_date": "September 16, 2022",
+            "review": "Shorter on wacky hijinks but still very funny, Confess, Fletch is a showcase for Jon Hamm's comedic chops that revives this long-dormant franchise with style."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":7,
+        "fields":{
+            "watched":"Yes",
+            "title":"Nope",
+            "rating": "4",
+            "release_date": "July 12, 2022",
+            "review": "Admirable for its originality and ambition even when its reach exceeds its grasp, Nope adds Spielbergian spectacle to Jordan Peele's growing arsenal."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":8,
+        "fields":{
+            "watched":"Yes",
+            "title":"Barbarian",
+            "rating": "5",
+            "release_date": "September 9, 2022.",
+            "review": "Smart, darkly humorous, and above all scary, Barbarian offers a chilling and consistently unpredictable thrill ride for horror fans."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":9,
+        "fields":{
+            "watched":"Yes",
+            "title":"Pearl",
+            "rating": "4",
+            "release_date": "September 16, 2022",
+            "review": "Pearl finds Ti West squeezing fresh gore out of the world he created with X -- and once again benefiting from a brilliant Mia Goth performance."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":10,
+        "fields":{
+            "watched":"No",
+            "title":"Happening",
+            "rating": "5",
+            "release_date": "May 6, 2022",
+            "review": "A tough but rewarding watch, Happening puts a personal face on an impossibly difficult choice and its heart-rending aftermath."
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":11,
+        "fields":{
+            "watched":"No",
+            "title":"The Woman King",
+            "rating": "5",
+            "release_date": "September 16, 2022",
+            "review": "All hail Viola Davis! The Woman King rules."
+        }
+}
+]

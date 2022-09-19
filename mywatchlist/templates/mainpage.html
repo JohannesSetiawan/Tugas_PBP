@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+  <h1>Tugas 3 Assignment PBP/PBD</h1>
+
+  <h3>Name: </h3>
+  <p>{{nama}}</p>
+
+  <h3>Student ID: </h3>
+  <p>{{npm}}</p>
+
+  <center>
+  <h1>Welcome to MyWatchList App !!!</h1>
+  <h3>Selamat datang di aplikasi MyWatchList. Silakan klik link di bawah ini untuk melihat Watch List anda:</h3>
+  <h3><a href="html">Lihat Watch List dalam format HTML</a><br></h3>
+  <h3><a href="xml">Lihat Watch List dalam format XML</a><br></h3>
+  <h3><a href="json">Lihat Watch List dalam format JSON</a><br></h3>
+  <h3>Info Watch List: </h3>
+  <h3>{{message}}</h3>
+  </center>
+
+ {% endblock content %}
