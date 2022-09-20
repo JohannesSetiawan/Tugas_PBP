@@ -18,6 +18,8 @@ def show_watchlist_main(request):
     context = {
         'nama': 'Johannes Setiawan',
         'npm': '2106750345',
+        'already_watched': already_watched,
+        'not_watched': not_watched,
         'message' : message
     }
     return render(request, "mainpage.html", context)
