@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5>Nama User: </h5>
+<p>{{username}}</p>
+
+<table border="2">
+    <tr>
+    <th>Tanggal Pembuatan</th>
+    <th>Nama Task</th>
+    <th>Deskripsi Task</th>
+    <th>Progres</th>
+    <th>Ganti Progress</th>
+    <th>Hapus Task</th>
+    </tr>
+    {% for task in tasklist %}
+        <tr>
+            <th>{{task.date}}</th>
+            <th>{{task.title}}</th>
+            <th>{{task.description}}</th>
+            <th>
+                {% if task.is_finished %}
+                Selesai
+                {% else %}
+                Belum Selesai
+                {% endif%}
+            </th>
+            <th><button><a href="{% url 'todolist:todolist_changeIsFinished' task.id %}">Ganti Progres</a></button></th>
+            <th><button><a href="{% url 'todolist:todolist_deleteTask' task.id %}">Hapus Task</a></button></th>
+        </tr>
+    {% endfor %}
+</table>
+<button><a href="{% url 'todolist:todolist_createTask' %}">Tambah Task Baru</a></button>
+<button><a href="{% url 'todolist:todolist_logout' %}">Logout</a></button>
+
+{% endblock content %}

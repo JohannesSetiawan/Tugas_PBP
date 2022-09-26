@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Buat Task</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "buat task">
+
+    <h1>Buat Task</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Judul Task: </td>
+                <td><input type="text" name="judul" placeholder="Judul Task" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Deskripsi: </td>
+                <td><input type="text" name="deskripsi" placeholder="Deskripsi Task" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Buat Task"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{% endblock content %}
