@@ -54,8 +54,7 @@ def todolist_createTask(request):
         judul = request.POST.get('judul')
         deskripsi = request.POST.get('deskripsi')
         user = request.user
-        status = False
-        Task.objects.create(user = user, title = judul, description = deskripsi, is_finished = status)
+        Task.objects.create(user = user, title = judul, description = deskripsi)
         response = HttpResponseRedirect(reverse("todolist:todolist_mainpage"))
         return response
 
