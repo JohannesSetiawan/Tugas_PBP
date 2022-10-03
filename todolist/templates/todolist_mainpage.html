@@ -2,45 +2,50 @@
 
 {% block meta %}
 <title>To Do List</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 {% endblock meta %}
 
 {% block content %}
+
 <h3>Tugas 4 PBP</h3>
 <p>Nama: Johannes Setiawan<p>
 <p>NPM : 2106750345<p>
 
-<h1>List Task Anda</h1>
+<h3>List Task Anda</h3>
 
-<h3>Nama User: </h3>
-<h3>{{username}}</h3>
+<h5>Nama User: </h5>
+<h5>{{username}}</h5>
 
-<table border="2">
-    <tr>
-    <th>Tanggal Pembuatan</th>
-    <th>Nama Task</th>
-    <th>Deskripsi Task</th>
-    <th>Progres</th>
-    <th>Ganti Progress</th>
-    <th>Hapus Task</th>
-    </tr>
+</br>
+<h5> Task anda dalam card: </h5>
+
+    <div class="row">
     {% for task in tasklist %}
-        <tr>
-            <th>{{task.date}}</th>
-            <th>{{task.title}}</th>
-            <th>{{task.description}}</th>
-            <th>
-                {% if task.is_finished %}
+      <div class="col-sm-3">
+       <div class="card bg-warning" style="width: 18rem;">
+         <div class="card-body">
+           <h5 class="card-title">Judul: {{task.title}}</h5>
+           <h6 class="card-subtitle mb-2 text-muted">Tanggal Pembuatan: {{task.date}}</h6>
+           <p class="card-text">Deskripsi: {{task.description}}</p>
+           <p class="card-text"> Selesai?
+           {% if task.is_finished %}
                 Selesai
                 {% else %}
                 Belum Selesai
                 {% endif%}
-            </th>
-            <th><button><a href="{% url 'todolist:todolist_changeIsFinished' task.id %}">Ganti Progres</a></button></th>
-            <th><button><a href="{% url 'todolist:todolist_deleteTask' task.id %}">Hapus Task</a></button></th>
-        </tr>
+           </p>
+           <a href="{% url 'todolist:todolist_changeIsFinished' task.id %}" class="btn btn-primary">Ganti Progres</a>
+           <a href="{% url 'todolist:todolist_deleteTask' task.id %}" class="btn btn-primary">Hapus Task</a>
+         </div>
+       </div>
+      </div>
     {% endfor %}
-</table>
+    </div>
+
+
 <button><a href="{% url 'todolist:todolist_createTask' %}">Tambah Task Baru</a></button>
 <button><a href="{% url 'todolist:todolist_logout' %}">Logout</a></button>
+
+
 
 {% endblock content %}

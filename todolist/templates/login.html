@@ -2,6 +2,7 @@
 
 {% block meta %}
 <title>Login</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 {% endblock meta %}
 
 {% block content %}
@@ -9,7 +10,7 @@
 <p>Nama: Johannes Setiawan<p>
 <p>NPM : 2106750345<p>
 <div class = "login">
-
+<div class="bg-success p-2 text-dark bg-opacity-25 border border-5 border-warning">
     <h1>Login</h1>
 
     <form method="POST" action="">
@@ -27,22 +28,26 @@
 
             <tr>
                 <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
+                <td><button class="btn btn-outline-primary" type="submit" value="Login">Login</button></td>
             </tr>
         </table>
     </form>
     <br>
-
+        
     {% if messages %}
-        <ul>
+        <ul style="list-style: none;">
             {% for message in messages %}
+                <div class="border border-danger p-2 mb-2 border-opacity-50">
                 <li>{{ message }}</li>
+                </div>
             {% endfor %}
+
         </ul>
-    {% endif %}     
+    {% endif %}    
         
     Belum mempunyai akun? <a href="{% url 'todolist:todolist_register' %}">Buat Akun</a>
 
+</div>
 </div>
 
 {% endblock content %}
