@@ -55,3 +55,56 @@ urlpatterns = [
 ```
 10. Melakukan ```push``` ke GitHub untuk melakukan _deployment_ ke aplikasi Heroku.
 11. Membuat dua akun pengguna dan 3 objek dari model ```Task``` pada akun masing-masing di aplikasi Heroku. Pengguna pertama yang dibuat adalah ```akun1``` dengan _password_ ```johannessetiawan1```. Objek ```Task``` yang dimiliki pengguna pertama adalah Dummy1, Dummy2, dan Dummy4. Pengguna kedua yang dibuat adalah ```Akun2``` dengan _password_ ```johannessetiawan2```. Objek ```Task``` yang dimiliki pengguna kedua adalah Dummy3, Dummy5, dan Dummy6.
+
+
+## TUGAS 5
+
+### Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
+Inline --> Dibuat dengan menambahkan atribut ```style``` di dalam tag sebuah elemen HTML. Kelebihannya adalah setiap elemen _style_-nya bisa berbeda-beda. Kelemahannya adalah kita harus mendefinisikannya di setiap elemen kecuali elemen yang _parent_-nya memiliki _inline style_. Selain itu, kita jadi sulit untuk mengatur _style_ dari halaman HTML kita dan struktur _file_ HTML kita jadi berantakan.
+
+Internal --> Dibuat dengan elemen ```<style>``` di bagian ```<head>```. Kelebihannya adalah kita bisa memilih elemen mana saja yang ingin kita _style_ dengan mendefinisikan _selector_ untuk _element_, _class_, dan/atau _ID_ yang ada di dalam elemen ```<style>``` ke elemen tersebut. Kelemahannya adalah kita harus mendefiniskan ```<style>``` tersebut di setiap dokumen HTML kita. Selain itu, metode ini juga menambah ukuran _file_ HTML kita dan menambah _loading time_.
+
+Eksternal --> Dibuat dengan elemen ```<link>``` berisi link yang menunjuk ke file eksternal CSS. Kelebihannya adalah kita mudah untuk menggunakan _style_ yang sama untuk semua dokumen HTML kita dengan memasukkan _link_ CSS yang menunjuk ke _file_ CSS yang sama dan ukuran _file_-nya lebih kecil. Kelemahannya adalah halaman HTMl kita tidak akan ter-_render_ penuh sebelum _external file_ CSS kita di-_load_ dan mengunduh _file_ dari berbagai _link_ dapat menambah _download time_ dari _website_ kita. 
+
+### Jelaskan tag HTML5 yang kamu ketahui.
+
+- ```<nav>``` --> Mendefinisikan kumpulan dari _links_. _Links_ yang ada di dalam elemen ini biasanya berupa navigasi menu utama pada halaman _website_.
+- ```<header>``` --> Digunakan untuk mendefinisikan bagian dari halaman HTML yang berupa _header_ yang biasanya berada pada bagian atas web.
+- ```<footer>``` --> Digunakan untuk mendefinisikan bagian dari halaman HTML yang berupa _footer_ yang biasanya berada pada bagian atas web.
+- ```<article>``` --> Digunakan untuk memberi penanda bahwa suatu konten dapat berdiri sendiri tanpa terikat dengan konten lain.
+- ```<section>``` --> Digunakan untuk mendefinisikan bagian/_section_ dalam sebuah dokumen HTML.
+
+### Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+
+- _Element Selector_ --> Selektor yang memilih elemen berdasarkan jenis _tag_.
+- _Class Selector_ --> Selektor yang memilih elemen berdasarkan nama _class_ yang didefiniskan pada tag elemen tersebut.
+- _ID Selector_ --> Selektor yang memilih elemen berdasarkan nama _id_ yang didefiniskan pada tag elemen tersebut. Selektor ini hanya dapat digunakan satu kali.
+- _Attribute Selector_ --> Selektor yang memilih elemen berdasarkan atribut yang didefinisikan di dalam elemen tersebut.
+- _Universal Selector_ --> Selektor yang memilih semua elemen berdasarkan _scope_/jangkauan tertentu
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+1. Menambahkan ```<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">``` ke setiap _head_ dari setiap dokumen HTML di folder ```templates``` supaya bisa menggunakan Bootstrap pada setiap dokumen. Bootstrap sudah otomatis membuat semua halaman _website_ yang dihasilkan menjadi _responsive_.
+2. Menambahkan elemen ```<style>``` untuk menggunakan CSS pada ```login.html```,```createTask.html```, ```register.html```, dan ```todolist_mainpage.html```. Lalu membuat _style_ untuk setiap dokumen. _Style_ yang ditambahkan adalah _background_, _border_, _text alignment_, _color_, membuat komponen menjadi berada di tengah, dan sebagainya. Selain itu, _navbar_ juga dibuat pada halaman ```todolist_mainpage.html```.
+3. Menambahkan elemen _card_ pada ```todolist_mainpage.html``` dengan kode sebagai berikut:
+```
+<div class="col-sm-3">
+       <div class="card bg-warning" style="width: 18rem;">
+         <div class="card-body">
+           <h5 class="card-title">Judul: {{task.title}}</h5>
+           <h6 class="card-subtitle mb-2 text-muted">Tanggal Pembuatan: {{task.date}}</h6>
+           <p class="card-text">Deskripsi: {{task.description}}</p>
+           <p class="card-text"> Selesai?
+           {% if task.is_finished %}
+                Selesai
+                {% else %}
+                Belum Selesai
+                {% endif%}
+           </p>
+           <a href="{% url 'todolist:todolist_changeIsFinished' task.id %}" class="btn btn-primary">Ganti Progres</a>
+           <a href="{% url 'todolist:todolist_deleteTask' task.id %}" class="btn btn-primary">Hapus Task</a>
+         </div>
+       </div>
+      </div>
+    {% endfor %}
+    </div>
+ ```
