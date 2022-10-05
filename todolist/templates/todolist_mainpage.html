@@ -3,21 +3,26 @@
 {% block meta %}
 <title>To Do List</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<style>
+    body {
+        background-color: lavenderblush;
+    }
+    .background-color1 {
+        background-color: #979bff;
+    }
+</style>
 {% endblock meta %}
 
 {% block content %}
 
-<h3>Tugas 4 PBP</h3>
-<p>Nama: Johannes Setiawan<p>
-<p>NPM : 2106750345<p>
 
+<nav class="navbar navbar-expand-lg navbar-light background-color1">
+    <a class="navbar-brand" href="#">Selamat datang, {{username}}!</a>
+</nav>
+
+<br>
 <h3>List Task Anda</h3>
-
-<h5>Nama User: </h5>
-<h5>{{username}}</h5>
-
-</br>
-<h5> Task anda dalam card: </h5>
+<br>
 
     <div class="row">
     {% for task in tasklist %}
@@ -42,10 +47,8 @@
     {% endfor %}
     </div>
 
-
-<button><a href="{% url 'todolist:todolist_createTask' %}">Tambah Task Baru</a></button>
-<button><a href="{% url 'todolist:todolist_logout' %}">Logout</a></button>
-
-
+<br>
+<a href="{% url 'todolist:todolist_createTask' %}" class="btn btn-secondary">Tambah Task Baru</a>
+<a href="{% url 'todolist:todolist_logout' %}" class="btn btn-secondary">Logout</a>
 
 {% endblock content %}

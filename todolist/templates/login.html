@@ -1,53 +1,88 @@
 {% extends 'base.html' %}
 
+
 {% block meta %}
 <title>Login</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<style>
+    body {
+        background-color: greenyellow;
+        align-items: center;
+    }
+
+    h1 {
+        color: orangered;
+        text-align: center
+    }
+
+    .msg {
+        background-color: wheat;
+    }
+    .mainpnl {
+        background-color: aliceblue;
+    }
+
+    ul {
+        font-family: ui-serif;
+        font-size: 20px;
+    }
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    div#outline1{
+        outline: 5px solid red;
+    }
+</style>
 {% endblock meta %}
 
+
 {% block content %}
-<h3>Tugas 4 PBP</h3>
-<p>Nama: Johannes Setiawan<p>
-<p>NPM : 2106750345<p>
-<div class = "login">
-<div class="bg-success p-2 text-dark bg-opacity-25 border border-5 border-warning">
-    <h1>Login</h1>
+<div class="mainpnl centered container w-50 align-middle" id="outline1">
+    <div class = "login">
+            <h1>Login</h1>
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>Username: </td>
+                        <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                    </tr>
 
-            <tr>
-                <td></td>
-                <td><button class="btn btn-outline-primary" type="submit" value="Login">Login</button></td>
-            </tr>
-        </table>
-    </form>
-    <br>
-        
-    {% if messages %}
-        <ul style="list-style: none;">
-            {% for message in messages %}
-                <div class="border border-danger p-2 mb-2 border-opacity-50">
-                <li>{{ message }}</li>
+                    <tr>
+                        <td>Password: </td>
+                        <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td><button class="btn btn-outline-primary" type="submit" value="Login">Login</button></td>
+                    </tr>
+                </table>
+            </form>
+            <br>
+
+            {% if messages %}
+            <ul style="list-style: none;">
+                {% for message in messages %}
+                <div class="msg container-fluid" style="border:5px solid darkred">
+                        <li>{{ message }}</li>
                 </div>
-            {% endfor %}
 
-        </ul>
-    {% endif %}    
-        
-    Belum mempunyai akun? <a href="{% url 'todolist:todolist_register' %}">Buat Akun</a>
+                {% endfor %}
 
+            </ul>
+            {% endif %}
+
+            Belum mempunyai akun? <a href="{% url 'todolist:todolist_register' %}">Buat Akun</a>
+
+        </div>
+    </div>
 </div>
-</div>
+
 
 {% endblock content %}
+
