@@ -6,7 +6,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import datetime
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.core import serializers
 from django.urls import reverse
 from todolist.models import Task
 
@@ -20,6 +21,24 @@ def todolist_mainpage(request):
         'tasklist': tasklist,
     }
     return render(request, "todolist_mainpage.html", context)
+
+@login_required(login_url='/todolist/login/')
+def show_json(request):
+    data = Task.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@login_required(login_url='/todolist/login/')
+def buat_task_ajax(request):
+    response_data = {}
+
+    if request.POST.get('action') == 'post':
+        judul = request.POST.get('judul')
+        deskripsi = request.POST.get('deskripsi')
+        user = request.user
+        obj_baru = Task(user = user, title = judul, description = deskripsi)
+        obj_baru.save()
+
+        return HttpResponseRedirect(reverse("todolist:todolist_mainpage"))
 
 def todolist_login(request):
     if request.method == 'POST':

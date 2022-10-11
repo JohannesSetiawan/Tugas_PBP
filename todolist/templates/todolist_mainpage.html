@@ -3,6 +3,7 @@
 {% block meta %}
 <title>To Do List</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     body {
         background-color: lavenderblush;
@@ -11,6 +12,64 @@
         background-color: #979bff;
     }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    function loadData(){
+        $('#task_card').empty();
+        let data_card ="";
+        $.ajax({
+            url: "{% url 'todolist:show_json' %}",
+            type: "GET",
+            dataType: "json",
+            success: function(resp){
+                for (let i of resp){
+                    let status = i.fields.status ? "Selesai" : "Belum Selesai";
+                    data_card +=`
+                    <div class="card bg-warning" style="width: 18rem;" id="${i.pk}">
+                        <div class="card-body">
+                            <h5 class="card-title">Judul: ${i.fields.title}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Tanggal Pembuatan: ${i.fields.date}</h6>
+                            <p class="card-text">Deskripsi: ${i.fields.description}</p>
+                            <p class="card-text"> Selesai? ${status}</p>
+                            <a href="changeIsFinished/${i.pk}" class="btn btn-primary">Ganti Progres</a>
+                            <a href="deleteTask/${i.pk}" class="btn btn-primary">Hapus Task</a>
+                        </div>
+                    </div>`
+                    ;
+                }
+                $('.task_card').html(data_card);
+            },
+            error: function(resp){
+                console.log('Error?');
+            }
+        })
+    }
+
+    $(document).ready(function(){
+        loadData();
+    });
+
+    $(document).on('submit', '#form_modal',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:"{% url 'todolist:buat_task_ajax' %}",
+            data:{
+                judul:$('#judul').val(),
+                deskripsi:$('#deskripsi').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+            dataType: "json",
+            success:function(){
+                document.getElementById("form_modal").reset();
+                loadData();
+            },
+        });
+    });
+</script>
+
 {% endblock meta %}
 
 {% block content %}
@@ -18,37 +77,61 @@
 
 <nav class="navbar navbar-expand-lg navbar-light background-color1">
     <a class="navbar-brand" href="#">Selamat datang, {{username}}!</a>
+    <!-- Trigger the modal with a button -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal">
+        Add Task
+    </button>
+    <hr>
+    <a href="{% url 'todolist:todolist_logout' %}" class="btn btn-secondary">Logout</a>
 </nav>
 
 <br>
 <h3>List Task Anda</h3>
 <br>
 
-    <div class="row">
-    {% for task in tasklist %}
-      <div class="col-sm-3">
-       <div class="card bg-warning" style="width: 18rem;">
-         <div class="card-body">
-           <h5 class="card-title">Judul: {{task.title}}</h5>
-           <h6 class="card-subtitle mb-2 text-muted">Tanggal Pembuatan: {{task.date}}</h6>
-           <p class="card-text">Deskripsi: {{task.description}}</p>
-           <p class="card-text"> Selesai?
-           {% if task.is_finished %}
-                Selesai
-                {% else %}
-                Belum Selesai
-                {% endif%}
-           </p>
-           <a href="{% url 'todolist:todolist_changeIsFinished' task.id %}" class="btn btn-primary">Ganti Progres</a>
-           <a href="{% url 'todolist:todolist_deleteTask' task.id %}" class="btn btn-primary">Hapus Task</a>
-         </div>
-       </div>
-      </div>
-    {% endfor %}
+<div class="row">
+    <div class="col-sm-3">
+        <div class="task_card" id ="task_card">
+
+        </div>
     </div>
 
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Buat Task</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="" id="form_modal">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td>Judul Task: </td>
+                            <td><input type="text" id="judul" name="judul" placeholder="Judul Task" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td>Deskripsi: </td>
+                            <td><textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi Task" rows="3"></textarea></td>
+                        </tr>
+                        <td>
+                            <button class="btn btn-warning" type="submit" value="Buat Task" data-bs-dismiss="modal">Buat Task</button>
+                        </td>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <br>
-<a href="{% url 'todolist:todolist_createTask' %}" class="btn btn-secondary">Tambah Task Baru</a>
-<a href="{% url 'todolist:todolist_logout' %}" class="btn btn-secondary">Logout</a>
 
 {% endblock content %}

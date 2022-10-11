@@ -1,16 +1,12 @@
 from django.urls import path
-from todolist.views import todolist_mainpage
-from todolist.views import todolist_login
-from todolist.views import todolist_register
-from todolist.views import todolist_createTask
-from todolist.views import todolist_logout
-from todolist.views import todolist_changeIsFinished
-from todolist.views import todolist_deleteTask
+from todolist.views import *
 
 app_name = 'todolist'
 
 urlpatterns = [
     path('', todolist_mainpage, name='todolist_mainpage'),
+    path('json/', show_json, name='show_json'),
+    path('add/', buat_task_ajax, name='buat_task_ajax'),
     path('login/', todolist_login, name='todolist_login'),
     path('register/', todolist_register, name='todolist_register'),
     path('create-task/', todolist_createTask, name='todolist_createTask'),
