@@ -12,5 +12,5 @@ urlpatterns = [
     path('create-task/', todolist_createTask, name='todolist_createTask'),
     path('logout/', todolist_logout, name='todolist_logout'),
     path('changeIsFinished/<int:pk>', todolist_changeIsFinished, name='todolist_changeIsFinished'),
-    path('deleteTask/<int:pk>', todolist_deleteTask, name='todolist_deleteTask'),
+    path('delete/<int:pk>', todolist_deleteTask, name='todolist_deleteTask'),
 ]

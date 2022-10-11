@@ -34,7 +34,7 @@
                             <p class="card-text">Deskripsi: ${i.fields.description}</p>
                             <p class="card-text"> Selesai? ${status}</p>
                             <a href="changeIsFinished/${i.pk}" class="btn btn-primary">Ganti Progres</a>
-                            <a href="deleteTask/${i.pk}" class="btn btn-primary">Hapus Task</a>
+                            <button class="btn btn-primary" onclick="deleteTask(${i.pk})">Hapus Task</button>
                         </div>
                     </div>
                     </section>
@@ -70,6 +70,19 @@
             },
         });
     });
+
+    function deleteTask(val){
+        console.log(123);
+        $.ajax({
+            type :"DELETE",
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+            url :`/todolist/delete/${val}`,
+            success: function () {
+                console.log(12333);
+                $(`#${val}`).remove()
+            },
+        })
+    }
 </script>
 
 {% endblock meta %}

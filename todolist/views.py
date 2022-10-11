@@ -10,6 +10,7 @@ from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.core import serializers
 from django.urls import reverse
 from todolist.models import Task
+from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required(login_url='/todolist/login/')
@@ -38,7 +39,7 @@ def buat_task_ajax(request):
         obj_baru = Task(user = user, title = judul, description = deskripsi)
         obj_baru.save()
 
-        return HttpResponseRedirect(reverse("todolist:todolist_mainpage"))
+        return JsonResponse({"instance": "Proyek Dibuat"},status=200)
 
 def todolist_login(request):
     if request.method == 'POST':
@@ -91,6 +92,8 @@ def todolist_changeIsFinished(request, pk):
     task.save()
     return redirect('todolist:todolist_mainpage')
     
+@csrf_exempt
 def todolist_deleteTask(request, pk):
-    Task.objects.filter(id=pk).delete()
-    return redirect('todolist:todolist_mainpage')
+    if request.method == 'DELETE':
+        Task.objects.filter(id=pk).delete()
+    return JsonResponse({"instance": "Task Dihapus"},status=200)
