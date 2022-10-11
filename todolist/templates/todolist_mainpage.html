@@ -26,6 +26,7 @@
                 for (let i of resp){
                     let status = i.fields.status ? "Selesai" : "Belum Selesai";
                     data_card +=`
+                    <div class="col-md-3">
                     <div class="card bg-warning" style="width: 18rem;" id="${i.pk}">
                         <div class="card-body">
                             <h5 class="card-title">Judul: ${i.fields.title}</h5>
@@ -35,10 +36,12 @@
                             <a href="changeIsFinished/${i.pk}" class="btn btn-primary">Ganti Progres</a>
                             <a href="deleteTask/${i.pk}" class="btn btn-primary">Hapus Task</a>
                         </div>
-                    </div>`
+                    </div>
+                    </div>
+                    `
                     ;
                 }
-                $('.task_card').html(data_card);
+                $('.task_card').append(data_card);
             },
             error: function(resp){
                 console.log('Error?');
@@ -61,7 +64,6 @@
                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                 action: 'post'
             },
-            dataType: "json",
             success:function(){
                 document.getElementById("form_modal").reset();
                 loadData();
@@ -90,8 +92,7 @@
 <h3>List Task Anda</h3>
 <br>
 
-<div class="row">
-    <div class="col-sm-3">
+<div class="row no-gutters">
         <div class="task_card" id ="task_card">
 
         </div>
